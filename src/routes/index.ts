@@ -6,5 +6,5 @@ const router = Router();
 router.use('/', userR);
 router.use('/admin', adminR);
 // router.use("/", (req, res) => res.json({ message: "root" }));
-
+// new
 export default router;
