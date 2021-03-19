@@ -30,8 +30,9 @@ usersRouter.post('/store', async (req, res) => {
 		const tokens = [req.body.token];
 
 		const bodyNotification = {
+			to: 'topics/topic',
 			notification,
-			registration_ids: tokens,
+			// registration_ids: tokens,
 		};
 
 		fetch('https://fcm.googleapis.com/fcm/send', {
