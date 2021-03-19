@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import User from '../../models/User';
+import Token from '../../models/Token';
 import mongoose from 'mongoose';
 import fetch from 'node-fetch';
 // initial of a route
@@ -16,6 +17,23 @@ const key =
 // ROUTES
 
 console.log('KEYYY ', process.env.KEY);
+
+usersRouter.post('/token', async (req, res) => {
+	const { token } = req.body;
+
+	try {
+		const exists = await Token.findOne({ token });
+		if (exists) {
+			return res.status(200).json({ message: 'Exists' });
+		}
+		const newToken = await Token.create({ token });
+		await newToken.save();
+		return res.status(200).json({ message: 'created' });
+	} catch (e) {
+		console.log(e);
+		return res.status(400).json({ message: 'Something wrong' });
+	}
+});
 
 usersRouter.post('/store', async (req, res) => {
 	try {
