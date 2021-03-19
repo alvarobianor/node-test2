@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import routes from './src/routes';
 import cors from 'cors';
@@ -13,4 +15,4 @@ app.use(routes);
 
 app.get('/test', (req, res) => res.json({ message: 'foi' }));
 
-app.listen(3333, () => console.log('Entrou'));
+app.listen(process.env.PORT || 3333, () => console.log('Entrou'));

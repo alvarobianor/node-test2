@@ -9,15 +9,12 @@ class Database {
 
 	init() {
 		try {
-			mongoose.connect(
-				'mongodb+srv://Alvim:etUOmgCeSIZwCdV0@cluster0.lhum7.mongodb.net/Reaach?retryWrites=true&w=majority',
-				{
-					useCreateIndex: true,
-					useNewUrlParser: true,
-					useFindAndModify: true,
-					useUnifiedTopology: true,
-				},
-			);
+			mongoose.connect(process.env.MONGO_URL as string, {
+				useCreateIndex: true,
+				useNewUrlParser: true,
+				useFindAndModify: true,
+				useUnifiedTopology: true,
+			});
 
 			console.log('Database connected!');
 		} catch (e) {
