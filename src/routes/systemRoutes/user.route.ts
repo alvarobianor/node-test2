@@ -12,11 +12,10 @@ interface IUser extends mongoose.Document {
 
 const usersRouter = Router();
 
-const key =
-	'AAAAzb42Iro:APA91bHYFIKmDYGPAfEcxWBv9hh4ECFPtfK7RRxn8of-xDXQKXVA1JGKn8XbhjaZZAnkK_d70tQqGNJfg4wCm--D1MGNflXgz1SQBJVTsx11Z-vkjSkHsk0qv1JsAWTpUA3XiAAhCfiB';
+const key = process.env.KEY;
 // ROUTES
 
-console.log('KEYYY ', process.env.KEY);
+// console.log('KEYYY ', process.env.KEY);
 
 usersRouter.post('/token', async (req, res) => {
 	const { token } = req.body;
@@ -37,9 +36,6 @@ usersRouter.post('/token', async (req, res) => {
 
 usersRouter.post('/store', async (req, res) => {
 	try {
-		console.log(req.body);
-		// const user: IUser[] = await (await User.find()).filter(e => e)
-
 		const notification = {
 			title: `A notification from ${req.body.name}`,
 			text: `A notificatin from ${req.body.name}`,
@@ -47,7 +43,7 @@ usersRouter.post('/store', async (req, res) => {
 
 		const tokens = await Token.find();
 		const justTokens = tokens.map(e => e.token);
-		console.log(justTokens);
+		// console.log(justTokens);
 
 		const bodyNotification = {
 			// to: 'topics/topic',
@@ -67,8 +63,6 @@ usersRouter.post('/store', async (req, res) => {
 				return res.status(200).json({ message: 'Success' });
 			})
 			.catch(e => res.status(400).send('Fails'));
-
-		// return res.status(200).json({ message: 'resp' });
 	} catch (error) {
 		console.log(error);
 	}
