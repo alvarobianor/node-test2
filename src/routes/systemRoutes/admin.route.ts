@@ -13,7 +13,7 @@ const adminRouter = Router();
 
 adminRouter.post('/', async (req, res) => {
 	try {
-		const { name, url = '' } = req.body;
+		const { name } = req.body;
 
 		const exists: IUser = (await User.findOne({ name })) as IUser;
 
@@ -21,7 +21,7 @@ adminRouter.post('/', async (req, res) => {
 			return res.status(400).json({ message: 'name already exists' });
 		}
 
-		const user = await User.create({ name, url });
+		const user = await User.create({ name });
 		await user.save();
 
 		return res.status(201).json({ message: 'created', user });

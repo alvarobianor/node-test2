@@ -7,15 +7,12 @@ import fetch from 'node-fetch';
 
 interface IUser extends mongoose.Document {
 	name: string;
-	url?: string;
 }
 
 const usersRouter = Router();
 
 const key = process.env.KEY;
 // ROUTES
-
-// console.log('KEYYY ', process.env.KEY);
 
 usersRouter.post('/token', async (req, res) => {
 	const { token } = req.body;
@@ -43,7 +40,6 @@ usersRouter.post('/store', async (req, res) => {
 
 		const tokens = await Token.find();
 		const justTokens = tokens.map(e => e.token);
-		// console.log(justTokens);
 
 		const bodyNotification = {
 			// to: 'topics/topic',
