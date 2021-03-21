@@ -31,7 +31,7 @@ jobs:
       - name: Build the project
         run: yarn build
       
-      - name: copy file via ssh password
+      - name: copy file to DO
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -41,3 +41,14 @@ jobs:
           source: ".,!node_modules"
           target: "~/node-test2"
         
+      - name: Install dependencies inside DO
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/node-test2/ && yarn
+          
+          
